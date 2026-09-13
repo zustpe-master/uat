@@ -6,6 +6,7 @@
 <title>Redirecting...</title>
 </head>
 <body>
+<p id="msg">Redirecting...</p>
 <noscript>JavaScript is required to complete DigiLocker verification.</noscript>
 <script>
   (function () {
@@ -14,7 +15,7 @@
     if (state.indexOf('nomrp') !== -1) {
       window.location.replace('https://dev.nomrp.store/api/partners/digilocker/callback' + window.location.search);
     } else {
-      document.body.textContent = 'Invalid or expired request.';
+      document.getElementById('msg').textContent = 'Invalid or expired request.';
     }
   })();
 </script>
