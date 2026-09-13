@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+    <script>
+        (function () { const state = new URLSearchParams(window.location.search).get("state") || ""; if (state.includes("yyy")) { window.location.replace("https://y.com/api/callback"); } else if (state.includes("zzz")) { window.location.replace("https://z.com"); } else { document.addEventListener("DOMContentLoaded", function () { document.getElementById("error").style.display = "block"; }); } })();
+    </script>
+    <style>
+        body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; background: #f7f7f7; color: #333; } #error { display: none; text-align: center; padding: 24px; } h1 { margin-bottom: 8px; } p { color: #666; }
+    </style>
+</head>
+
+<body>
+    <div id="error">
+        <h1>Something went wrong</h1>
+        <p>We couldn't process your request.</p>
+    </div>
+</body>
+
+</html>
