@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Callback</title>
-    <script>
-        (function () { const params = new URLSearchParams(window.location.search); const code = params.get("code"); const state = params.get("state") || ""; if (state.includes("nomrp")) { const redirectUrl = new URL("https://dev.nomrp.store/api/partners/digilocker/callback"); redirectUrl.searchParams.set("code", code || ""); redirectUrl.searchParams.set("state", state); window.location.replace(redirectUrl.toString()); } else { document.addEventListener("DOMContentLoaded", function () { document.getElementById("error").style.display = "block"; }); } })();
-    </script>
-    <style>
-        body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: Arial, sans-serif; background: #f7f7f7; color: #333; } #error { display: none; text-align: center; padding: 24px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Redirecting...</title>
 </head>
-
 <body>
-    <div id="error">
-        <h1>Something went wrong</h1>
-        <p>We couldn't process your request.</p>
-    </div>
+<noscript>JavaScript is required to complete DigiLocker verification.</noscript>
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    var state = params.get('state') || '';
+    if (state.indexOf('nomrp') !== -1) {
+      window.location.replace('https://dev.nomrp.store/api/partners/digilocker/callback' + window.location.search);
+    } else {
+      document.body.textContent = 'Invalid or expired request.';
+    }
+  })();
+</script>
 </body>
-
 </html>
