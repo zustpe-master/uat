@@ -3,10 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow">
-<title>Redirecting...</title>
+<title>Completing verification...</title>
+<style>
+  body { display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #fafafa; color: #222; }
+  .box { text-align: center; }
+  .spinner { width: 32px; height: 32px; margin: 0 auto 16px; border: 3px solid #ddd; border-top-color: #2DA127; border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #msg { font-size: 15px; }
+</style>
 </head>
 <body>
-<p id="msg">Redirecting...</p>
+<div class="box">
+  <div class="spinner" id="spinner"></div>
+  <p id="msg">Completing your identity verification, please wait...</p>
+</div>
 <noscript>JavaScript is required to complete DigiLocker verification.</noscript>
 <script>
   (function () {
@@ -14,8 +24,16 @@
     var state = params.get('state') || '';
     if (state.indexOf('nomrp') !== -1) {
       window.location.replace('https://dev.nomrp.store/api/partners/digilocker/callback' + window.location.search);
+    } else if (state.indexOf('kaamrade') !== -1) {
+      // The DigiLocker redirect_uri is this gateway's own fixed path
+      // (uat.zustpe.com/login/kyc/setu-callback) - the actual page that
+      // completes verification lives on the app's own domain at
+      // /candidate/verifykyc (frontend/src/pages/Candidate_Pages/KYCverification.jsx),
+      // not at this page's own path.
+      window.location.replace('https://dev.kaamrade.com/candidate/verifykyc' + window.location.search);
     } else {
-      document.getElementById('msg').textContent = 'Invalid or expired request.';
+      document.getElementById('spinner').style.display = 'none';
+      document.getElementById('msg').textContent = 'Invalid or expired verification request. Please restart the process from the app.';
     }
   })();
 </script>
